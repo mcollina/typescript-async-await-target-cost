@@ -32,6 +32,13 @@ node loop.es2018.js
 
 echo "------------------------------------------------------"
 
+echo "benchmarking async/await with TS target es2022"
+npx tsc --target es2022 loop.ts --outfile loop.es2022.js
+node loop.es2022.js
+
+
+echo "------------------------------------------------------"
+
 echo "benchmarking async/await with TS target esnext"
 npx tsc --target esnext loop.ts --outfile loop.esnext.js
 node loop.esnext.js
