@@ -1,0 +1,23 @@
+on:
+  ## Allow triggering this workflow manually via GitHub CLI/web
+  workflow_dispatch:
+
+jobs:
+  bench:
+    name: Run benchmarks
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+    env:
+      NODE_ENV: development
+    strategy:
+      matrix:
+        node: [ '14', '16', 'lts/*' ]
+    steps:
+      - uses: actions/checkout@v3
+      - name: 'Use Node.js ${{ matrix.node }}'
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install
+      - name: Run bench
+        run: ./bench.sh
